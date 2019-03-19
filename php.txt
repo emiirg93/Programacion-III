@@ -1,0 +1,5 @@
+.Para mostrar usamos echo "";
+.Para crear una variable necesitamos usar el signo $
+ej : $nombre = "Octavio";
+
+para inspeccionar el objeto usamos el metodo var_dump (variable);
