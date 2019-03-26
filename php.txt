@@ -3,3 +3,5 @@
 ej : $nombre = "Octavio";
 
 para inspeccionar el objeto usamos el metodo var_dump (variable);
+
+$DATO =$_SERVER['REQUEST_METHOD'];
