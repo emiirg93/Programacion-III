@@ -1,0 +1,4 @@
+3,Paco,12kg
+6,pepsi,500
+2,Iphone 7 Plus,50
+2,Xiaomi Redmi Note 7,50
