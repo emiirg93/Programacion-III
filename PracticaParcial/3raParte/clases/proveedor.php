@@ -78,10 +78,10 @@ class proveedor{
         return $array;
     }
 
-    public static function SepararRuta($proveedor)
+    public static function SepararRuta($objeto,$caracter,$index)
     {
-        $array = explode('/',$proveedor->foto);
-        return $array[2];
+        $array = explode($caracter,$objeto->foto);
+        return $array[$index];
     }
 
     public static function TrabajarConFoto($pathArchivo,$rutaBackUp,$ruta)
@@ -94,7 +94,7 @@ class proveedor{
 
         if(is_a($objeto,'proveedor')){
             
-            $arrayNombre = proveedor::SepararRuta($objeto); 
+            $arrayNombre = proveedor::SepararRuta($objeto,'/',2); 
 
             if (file_exists($objeto->foto))  {
 
@@ -225,6 +225,23 @@ class proveedor{
             echo "Error<br>Falta ingresas alguno de los siguientes datos (id,nombre,email,foto)";
         }
     }
+    /*
+    public static function CuerpoHTML($directory,$archivo)
+    {
+        $string = "<!DOCTYPE>
+        <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <title>Imágenes dinámicas de una carpeta en php</title>
+        </head>
+
+        <body>
+        <p>./".$directory."/".$archivo."</p>
+        <img src= '".$directory."/".$archivo."' alt = 'Foto'>
+        </body>
+        </html>";
+
+        return $string;
+    }
 
     public static function ListarFotosBack()
     {
@@ -232,14 +249,53 @@ class proveedor{
 
         $arrayProveedores = proveedor::ArrayObjetosProveedor($path);
 
-        foreach ($arrayProveedores as $item) {
-            $ruta = $item->foto;
+        $directory = "backUpFotos";
 
-            echo "Nombre Proveedor: ".$item->nombre."
-            <br><img src='".$ruta."'alt='foto'>";
+        $array = dir($directory);
 
-            
+        while (($archivo = $array->read()) !== false)
+        {   
+            echo Proveedor::CuerpoHTML($directory,$archivo);
         }
+
+        $array->close();
     }
+
+    */
+
+    public static function ListarFotosBack()
+    {
+        $path = "./archivos/proveedores.txt";
+
+        $arrayProveedores = proveedor::ArrayObjetosProveedor($path);
+        $arrayFotos = array();
+
+        $directory = "backUpFotos";
+
+        $array = dir($directory);
+
+        while (($archivo = $array->read()) !== false)
+        {   
+            array_push($arrayFotos,$archivo);
+        }
+
+        $array->close();
+
+        foreach ($arrayProveedores as $prov) {
+            echo "Nombre Poveedor : ".$prov->nombre."<br>";
+            
+            foreach ($arrayFotos as $nomFoto) {
+                $array = explode('.',$nomFoto);
+
+                if($prov->id == $array[0]){
+                    echo $nomFoto."<br>";
+                }
+            }
+        }
+
+        
+    }
+
+
 }
 ?>
