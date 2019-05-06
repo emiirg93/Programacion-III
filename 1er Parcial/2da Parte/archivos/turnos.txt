@@ -1,0 +1,1 @@
+Chevrolet,Astra,EZP312,140.000,6/5/2019,10.000km
